@@ -20,6 +20,8 @@ import { ReservationProvider } from "./components/ReservationContext";
 import EditReservation from "./components/EditReservation";
 import Thankyou from "./pages/Thankyou";
 import AddCabin from "./pages/AddCabin";
+import EditCabin from "./components/EditCabin";
+import Bookings from "./pages/Bookings";
 
 axios.defaults.withCredentials=true;
 
@@ -52,6 +54,7 @@ function App() {
        <Route path="/about" element={<About/>}/>
        <Route path="/login" element={<LoginForm/>} />
        <Route path="/register" element={<Register/>}/>
+       <Route path="/cabins/Edit/:id" element={<EditCabin/>}/>
        <Route path="/account" element={
         <Layout>
           <Account/>
@@ -59,6 +62,10 @@ function App() {
         <Route exact path="/account/reservations" element={
         <Layout>
           <Reservations/>
+        </Layout>}/>
+        <Route exact path="/account/bookings" element={
+        <Layout>
+          <Bookings/>
         </Layout>}/>
         <Route path="/account/profile" element={
         <Layout>

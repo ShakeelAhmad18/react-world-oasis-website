@@ -1,9 +1,12 @@
-import { UsersIcon } from '@heroicons/react/24/solid';
+import { PencilIcon, UsersIcon } from '@heroicons/react/24/solid';
+import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
+import { selectGuest } from '../redux/authSlice';
 
 function CabinCard({ cabin }) {
   
   const { _id, name, maxCapacity, regularPrice, discount,image} = cabin;
+  const admin=useSelector(selectGuest)
 
   return (
     <div className="flex border-primary-800 border mb-3" >
@@ -45,6 +48,9 @@ function CabinCard({ cabin }) {
         </div>
 
         <div className="bg-primary-950 border-t border-t-primary-800 text-right">
+         {admin.role === 'admin' ? <span className='bg-primary-950 border-t border-t-primary-800 text-left'>
+          <Link to={`/cabins/Edit/${_id}`}> <PencilIcon className='border-l border-primary-800 py-4 px-6 inline-block hover:bg-accent-600 transition-all hover:text-white h-14'/> </Link>
+          </span> : null }
           <Link
             to={`/cabins/${_id}`}
             className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-accent-600 transition-all hover:text-primary-900"

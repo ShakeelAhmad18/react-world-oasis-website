@@ -41,7 +41,7 @@ export default function LoginForm() {
       console.log(data)
       await dispatch(SET_LOGIN(true))
       await dispatch(SET_NAME(data.name))
-      navigate('/account')
+      navigate('/account/profile')
    } catch (error) {
     console.log(error.message)
 }

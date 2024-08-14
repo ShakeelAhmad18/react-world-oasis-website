@@ -41,7 +41,6 @@ import { useNavigate } from "react-router-dom";
        status,
        cabinId
      }
-     console.log(formData)
      await dispatch(createBooking(formData))
      resetRange()
      navigate('/account/thankyou')

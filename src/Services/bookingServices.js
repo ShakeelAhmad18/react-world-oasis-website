@@ -83,3 +83,21 @@ export const GetBooking=async (id)=>{
         
     }
 }
+
+//all bookings seen by admin
+
+export const GetAllBookings=async ()=>{
+    try {
+
+        const res=await axios.get('http://localhost:5000/api/booking/admin')
+        return res.data;
+
+    } catch (error) {
+
+        const message=(error.response && error.response.data && 
+            error.response.data.message) || error.message || error.toString();
+            toast.error(message)
+            throw new Error(message);
+
+    }
+}

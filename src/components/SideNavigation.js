@@ -4,6 +4,7 @@ import {
   HomeIcon,
   UserIcon,
 } from '@heroicons/react/24/solid';
+import { VscBellDot } from "react-icons/vsc";
 import { RiAdminFill } from "react-icons/ri"
 import { Link, useLocation } from 'react-router-dom';
 import SignOutButton from './SignOutButton';
@@ -58,7 +59,13 @@ function SideNavigation() {
       name:'Add Cabin',
       to:'/account/admin',
       icon:<RiAdminFill/>
-    } ] : []
+    },
+    {
+      name:'Bookings',
+      to:'/account/Bookings',
+      icon:<VscBellDot />
+    }
+   ] : []
   ];
 
   return (

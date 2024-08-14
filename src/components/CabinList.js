@@ -9,8 +9,8 @@ export default function CabinList({ filter }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await getCabins();
-        const cabins = res.data;
+        const cabins  = await getCabins();
+        console.log(cabins)
         setData(cabins);
       } catch (error) {
         console.error('Error fetching cabins:', error);
@@ -21,7 +21,7 @@ export default function CabinList({ filter }) {
     fetchData();
   }, []);
 
-  let displayedCabins = [];
+  let displayedCabins=data;
 
   if (filter === 'all') displayedCabins = data;
   if (filter === 'small') displayedCabins = data.filter((cabin) => cabin.maxCapacity <= 3);

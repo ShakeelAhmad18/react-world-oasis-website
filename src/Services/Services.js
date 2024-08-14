@@ -90,8 +90,8 @@ export async function getCabin(id) {
   
     try {
   
-      const data=await axios.get('http://localhost:5000/api/cabins')
-      return data;
+      const res=await axios.get('http://localhost:5000/api/cabins')
+      return res.data;
       
     } catch (error) {
       console.log(error)
@@ -100,6 +100,15 @@ export async function getCabin(id) {
     
   };
 
+
+ export const UpdateCabin=async (id,formData)=>{
+    try {
+      const res=await axios.patch(`http://localhost:5000/api/cabins/${id}`,formData)
+      return res.data;
+    } catch (error) {
+      console.log(error.message)
+    }
+ }
 
 
   //get countries

@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { CreateBooking, DeleteReservation, GetBooking, GetBookings, UpdateReservation } from "../Services/bookingServices";
+import { CreateBooking, DeleteReservation, GetAllBookings, GetBooking, GetBookings, UpdateReservation } from "../Services/bookingServices";
 import toast from "react-hot-toast";
 
 
 const initialState={
     booking:[],
     bookings:[],
+    adminBookings:[],
     isError:false,
     isSucess:false,
     isLoading:false,
@@ -59,6 +60,27 @@ export const getBookings=createAsyncThunk(
         }
     }
 )
+
+//admin bookings thunk
+
+export const getAllBookings=createAsyncThunk(
+  'booking/admin',
+  async (_,ThunkApi)=>{
+    try {
+
+      return await GetAllBookings()
+
+    } catch (error) {
+
+      const message=(error.response && error.response.data && 
+        error.response.data.message) || error.message || error.toString();
+       toast.error(message)
+       return ThunkApi.rejectWithValue(error.message)
+
+    }
+  }
+)
+
 
 export const  updateReservation=createAsyncThunk(
   'booking/update',
@@ -183,9 +205,26 @@ const bookingSlice=createSlice({
             state.message=action.payload;
             toast.error(action.payload);
           })
+          .addCase(getAllBookings.pending,(state)=>{
+            state.isLoading=true;
+          })
+          .addCase(getAllBookings.fulfilled,(state,action)=>{
+            state.isLoading=false;
+            state.isError=false;
+            state.isSucess=true;
+            state.adminBookings=action.payload;
+          })
+          .addCase(getAllBookings.rejected,(state,action)=>{
+            state.isLoading=false;
+            state.isError=true;
+            state.isSucess=false;
+            state.message=action.payload;
+          })
       }
 });
 
 export const {ADD_BOOKING}=bookingSlice.actions;
+
+export const selectAdminBooking=(state)=>state.booking.adminBookings
 
 export default bookingSlice.reducer;
