@@ -22,6 +22,7 @@ import Thankyou from "./pages/Thankyou";
 import AddCabin from "./pages/AddCabin";
 import EditCabin from "./components/EditCabin";
 import Bookings from "./pages/Bookings";
+import CheckoutForm from "./components/CheckoutForm";
 
 axios.defaults.withCredentials=true;
 
@@ -54,6 +55,7 @@ function App() {
        <Route path="/about" element={<About/>}/>
        <Route path="/login" element={<LoginForm/>} />
        <Route path="/register" element={<Register/>}/>
+       <Route path="/checkout" element={<CheckoutForm/>}/>
        <Route path="/cabins/Edit/:id" element={<EditCabin/>}/>
        <Route path="/account" element={
         <Layout>

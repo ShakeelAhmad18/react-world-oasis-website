@@ -13,10 +13,10 @@ export default function Page() {
   
   return (
     <div>
-      <h1 className="text-4xl mb-5 text-accent-400 font-medium">
+      <h1 className="text-4xl mb-5 ml-4 text-accent-400 font-medium">
         Our Luxury Cabins
       </h1>
-      <p className="text-primary-200 text-lg mb-8">
+      <p className="text-primary-200 text-lg mb-8 ml-3 mr-2">
         Cozy yet luxurious cabins, located right in the heart of the Italian
         Dolomites. Imagine waking up to beautiful mountain views, spending your
         days exploring the dark forests around, or just relaxing in your private

@@ -10,6 +10,7 @@ const initialState={
     isError:false,
     isSucess:false,
     isLoading:false,
+    cart_price:'',
     message:''
 }
 
@@ -120,7 +121,7 @@ const bookingSlice=createSlice({
     name:'booking',
     initialState,
     reducers:{
-        ADD_BOOKING(state,action){
+        Booking_Price(state,action){
            
         }
     },
@@ -225,6 +226,7 @@ const bookingSlice=createSlice({
 
 export const {ADD_BOOKING}=bookingSlice.actions;
 
-export const selectAdminBooking=(state)=>state.booking.adminBookings
+export const selectAdminBooking=(state)=>state.booking.adminBookings;
+export const selectIsLoading=(state)=>state.booking.isLoading;
 
 export default bookingSlice.reducer;

@@ -7,8 +7,6 @@ import { useDispatch } from "react-redux";
 import { loginGuest } from "../Services/authServies";
 import { SET_LOGIN, SET_NAME } from "../redux/authSlice";
 
-
-
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,8 +45,6 @@ export default function LoginForm() {
 }
 
  
- 
-
   
   }
   

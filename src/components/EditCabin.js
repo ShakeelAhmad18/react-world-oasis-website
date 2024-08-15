@@ -32,9 +32,13 @@ export default function EditCabin() {
 
    async function handleUpdate(e){
            e.preventDefault();
-           const formData=new FormData()
-           
-           formData.append('image',image)
+
+           const formData={
+            'name':cabin.name,
+            'image':image
+           }
+
+           console.log(formData)
       }
     
   return (

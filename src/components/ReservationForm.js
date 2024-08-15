@@ -4,17 +4,18 @@ import { differenceInDays } from "date-fns";
 import {useReservation} from './ReservationContext'
 import { useState } from "react";
 import { createBooking } from "../redux/bookingSlice";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
   function ReservationForm({cabin,cabinId}) {
     const [observation,setObservation]=useState('')
     const dispatch=useDispatch();
-    const navigate=useNavigate()
+   // const navigate=useNavigate()
     const [numGuests,setGuests]=useState('')
    const user=useSelector(selectName)
    const {range,resetRange}=useReservation();
 
-   const {maxCapacity,regularPrice,discount} = cabin;
+   const {name,maxCapacity,regularPrice,discount} = cabin;
    const startDate=range.from;
    const endDate=range.to;
    const numNights=Math.abs(differenceInDays(startDate,endDate));
@@ -25,8 +26,7 @@ import { useNavigate } from "react-router-dom";
    const hasBreakfast=false;
    const status='unconfirmed'
    
-   const handleCreateBooking=async (e)=>{
-     e.preventDefault();
+  /* const handleCreateBooking=async (e)=>{
      const formData={
        startDate,
        endDate,
@@ -42,10 +42,53 @@ import { useNavigate } from "react-router-dom";
        cabinId
      }
      await dispatch(createBooking(formData))
-     resetRange()
-     navigate('/account/thankyou')
-   }
+   }*/
+   
+   const makePayment=async (e)=>{
+     e.preventDefault();
 
+     const stripe= await loadStripe('pk_test_51PB07sDu3INfeks6UGFt0KC5Nkma2uGm3xLkR7GgcCAVhA9tb5slb71hoxmao4TaVFZq23eX10w3QlZdt9BvNTyR00hoXmDIEK')
+     const formData={
+      name,
+      startDate,
+      endDate,
+      numGuests,
+      numNights,
+      cabinPrice,
+      observation,
+      extraPrice,
+      totalPrice,
+      isPaid,
+      hasBreakfast,
+      status,
+      cabinId
+    }
+
+     const body={
+       cabins:formData
+     }
+
+    const  headers={
+      'Content-Type':'application/json'
+     }
+     const res=await fetch('http://localhost:5000/api/create-checkout-session',{
+      method:"POST",
+      headers:headers,
+      body:JSON.stringify(body)
+     })
+
+      const session=await res.json()
+      const result=stripe.redirectToCheckout({
+        sessionId:session.id
+      })
+     
+      if(result.error){
+        console.log(result.error)
+      }else{
+         await dispatch(createBooking({...formData,isPaid:true,status:'confirmed'}))
+         resetRange();
+      }
+   }
 
   return (
     <div className='scale-[1.01]'>
@@ -57,7 +100,7 @@ import { useNavigate } from "react-router-dom";
           <p>{user}</p>
         </div> 
       </div>
-      <form className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col' onSubmit={handleCreateBooking}>
+      <form className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col' onSubmit={makePayment}>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>
           <select
@@ -99,6 +142,7 @@ import { useNavigate } from "react-router-dom";
          : <button className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'>
             Reserve now
           </button> 
+         
           }
         </div>
       </form>

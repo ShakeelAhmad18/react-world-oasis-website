@@ -10,7 +10,6 @@ function DeleteReservation({ bookingId }) {
      const dispatch=useDispatch();
 
      async function handleDelete(bookingId){
-        console.log(bookingId)
         await dispatch(deleteBooking(bookingId))
         await dispatch(getBookings())
          
@@ -20,7 +19,7 @@ function DeleteReservation({ bookingId }) {
      const ConfirmDeleteProduct=(id)=>{
 
       confirmAlert({
-        title: 'Delete a Product',
+        title: 'Delete a Booking',
         message: 'Are you sure Delete to this Booking',
         buttons: [
           {

@@ -6,7 +6,7 @@ function Logo() {
       <Link to="/" className="flex items-center gap-4 z-10">
         <img src='../../logo.png' className="h-10 w-10" alt="The Wild Oasis logo"/>
         <span className="text-xl font-semibold text-primary-100">
-          The Wild Oasis
+          Luxurious
         </span>
       </Link>
     );
