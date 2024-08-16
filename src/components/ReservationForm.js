@@ -25,6 +25,7 @@ import { loadStripe } from "@stripe/stripe-js";
    const isPaid=false;
    const hasBreakfast=false;
    const status='unconfirmed'
+   const regularprice=regularPrice-discount
    
   /* const handleCreateBooking=async (e)=>{
      const formData={
@@ -54,6 +55,7 @@ import { loadStripe } from "@stripe/stripe-js";
       endDate,
       numGuests,
       numNights,
+      regularprice,
       cabinPrice,
       observation,
       extraPrice,

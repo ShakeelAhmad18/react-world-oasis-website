@@ -23,15 +23,24 @@ import AddCabin from "./pages/AddCabin";
 import EditCabin from "./components/EditCabin";
 import Bookings from "./pages/Bookings";
 import CheckoutForm from "./components/CheckoutForm";
+import {QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 axios.defaults.withCredentials=true;
 
-
+const queryClient=new QueryClient({
+  defaultOptions:{
+    queries:{
+      staleTime:0
+    }
+  }
+})
 
 
 function App() {
    const dispatch=useDispatch()
 
+  
    //get login status if user refresh the page then it get login
   useEffect(()=>{
 
@@ -41,11 +50,13 @@ function App() {
        }
        loginstatus()
 
-  },[dispatch])
-
+  },[dispatch]) 
+ 
 
   return (
     <>
+  <QueryClientProvider client={queryClient}>
+   <ReactQueryDevtools/>
   <ReservationProvider>
    <Router>
     <Header/>
@@ -90,6 +101,7 @@ function App() {
    </Router>
    <Toaster position="top-center"/>
   </ReservationProvider>
+  </QueryClientProvider>
    </>
   );
 }

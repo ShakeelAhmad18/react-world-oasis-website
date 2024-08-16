@@ -21,10 +21,7 @@ function ReservationCard({ booking }) {
     cabinId,
   } = booking;
 
-
-
-
-
+  
   return (
     <div className='flex border border-primary-800 mr-4'>
       <div className='relative h-32 aspect-square'>
