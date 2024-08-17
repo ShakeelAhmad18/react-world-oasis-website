@@ -16,7 +16,6 @@ function isAlreadyBooked(range, datesArr) {
 
 function DateSelector({settings,cabin,bookedDates}) {
 
-  console.log(bookedDates)
   const {range,setRange,resetRange}=useReservation();
 
 

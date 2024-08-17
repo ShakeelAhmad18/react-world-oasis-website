@@ -23,8 +23,9 @@ import AddCabin from "./pages/AddCabin";
 import EditCabin from "./components/EditCabin";
 import Bookings from "./pages/Bookings";
 import CheckoutForm from "./components/CheckoutForm";
-import {QueryClient, QueryClientProvider, useQuery} from '@tanstack/react-query'
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import LoginStatus from "./components/LoginStatus";
 
 axios.defaults.withCredentials=true;
 
@@ -56,7 +57,7 @@ function App() {
   return (
     <>
   <QueryClientProvider client={queryClient}>
-   <ReactQueryDevtools/>
+   <ReactQueryDevtools initialIsOpen={false}/>
   <ReservationProvider>
    <Router>
     <Header/>
@@ -101,6 +102,7 @@ function App() {
    </Router>
    <Toaster position="top-center"/>
   </ReservationProvider>
+  <LoginStatus/>
   </QueryClientProvider>
    </>
   );

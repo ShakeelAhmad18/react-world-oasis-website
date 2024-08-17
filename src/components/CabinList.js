@@ -10,7 +10,6 @@ export default function CabinList({ filter }) {
     async function fetchData() {
       try {
         const cabins  = await getCabins();
-        console.log(cabins)
         setData(cabins);
       } catch (error) {
         console.error('Error fetching cabins:', error);

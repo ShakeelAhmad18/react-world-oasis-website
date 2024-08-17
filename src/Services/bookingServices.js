@@ -101,3 +101,20 @@ export const GetAllBookings=async ()=>{
 
     }
 }
+
+//send confirmation email;
+
+export const BookingConfirmationEmail=async (formData)=>{
+     try{
+        const res=await axios.post('http://localhost:5000/api/booking/sendemail',formData)
+        return res.data;
+     }catch(error){
+        const message=(error.response && error.response.data && 
+            error.response.data.message) || error.message || error.toString();
+            toast.error(message)
+            throw new Error(message);
+     }
+}
+
+
+

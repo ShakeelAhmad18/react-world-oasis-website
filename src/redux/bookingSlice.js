@@ -117,6 +117,20 @@ export const getBooking=createAsyncThunk(
   }
 )
 
+export const bookingConfirmationEmail=createAsyncThunk(
+  'booking/sendEmail',
+  async (formaData,ThunkApi)=>{
+    try {
+      return await bookingConfirmationEmail(formaData)
+    } catch (error) {
+      const message=(error.response && error.response.data && 
+        error.response.data.message) || error.message || error.toString();
+       toast.error(message)
+       return ThunkApi.rejectWithValue(error.message)
+    }
+  }
+)
+
 const bookingSlice=createSlice({
     name:'booking',
     initialState,
@@ -216,6 +230,21 @@ const bookingSlice=createSlice({
             state.adminBookings=action.payload;
           })
           .addCase(getAllBookings.rejected,(state,action)=>{
+            state.isLoading=false;
+            state.isError=true;
+            state.isSucess=false;
+            state.message=action.payload;
+          })
+          .addCase(bookingConfirmationEmail.pending,(state)=>{
+            state.isLoading=true;
+          })
+          .addCase(bookingConfirmationEmail.fulfilled,(state,action)=>{
+            state.isLoading=false;
+            state.isError=false;
+            state.isSucess=true;
+            toast.success('Confirmation Email Send to user Email')
+          })
+          .addCase(bookingConfirmationEmail.rejected,(state,action)=>{
             state.isLoading=false;
             state.isError=true;
             state.isSucess=false;

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SelectCountry from './SelectCountry';
 import { useDispatch} from 'react-redux';
-import { SET_GUEST, SET_NAME } from '../redux/authSlice';
+import { SET_EMAIL, SET_GUEST, SET_NAME } from '../redux/authSlice';
 import { getGuest, updateGuest } from '../Services/authServies';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -50,6 +50,7 @@ export default function UpdateProfile() {
          setProfile(data);
          dispatch(SET_GUEST(data))
          dispatch(SET_NAME(data.name))
+         dispatch(SET_EMAIL(data.email))
         navigate('/account/profile')
         toast.success('Guest Updated')
   }

@@ -31,8 +31,9 @@ export default function AddCabin() {
     }
 
   return (
-    <div className='items-center'>
-      <h1 className='flex-1 text-3xl text-purple-700 justify-between ml-10'>Add Cabin</h1>
+    <div className="grid place-items-center h-screen">
+     <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400 bg-violet-950">
+      <h1 className="text-xl font-bold my-4 text-primary-100">Add Cabin</h1>
       {isLoading && <Spinner/>}
       <form onSubmit={handleSubmit}>
          <label className='mt-10 mb-3 text-primary-100 text-xl'>Name</label><br/>
@@ -49,6 +50,7 @@ export default function AddCabin() {
          <input type='file' className='rounded py-2 px-5 mt-2' name='image' onChange={(e)=>setCabinImage(e.target.files[0])} /><br/>
          <button className='py-3 px-2 bg-blue-800 text-xl mt-3 mb-3 rounded'>Add Cabin</button>
       </form>
+      </div>
     </div>
   )
 }

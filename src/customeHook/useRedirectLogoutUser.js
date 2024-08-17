@@ -1,14 +1,16 @@
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { loginStatus } from '../Services/authServies'
 import { SET_LOGIN } from '../redux/authSlice'
 import toast from 'react-hot-toast'
+import { useEffect } from 'react'
 
 
 const  useRedirectLogoutUser =(path)=> {
       const dispatch=useDispatch()
       const navigate=useNavigate()
+
+   
 
    useEffect(()=>{
      async function RedirectLogoutUser(){

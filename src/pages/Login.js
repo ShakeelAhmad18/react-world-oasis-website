@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../Services/helper";
 import { useDispatch } from "react-redux";
 import { loginGuest } from "../Services/authServies";
-import { SET_LOGIN, SET_NAME } from "../redux/authSlice";
+import { SET_LOGIN,SET_NAME,SET_EMAIL} from "../redux/authSlice";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -39,6 +39,7 @@ export default function LoginForm() {
       console.log(data)
       await dispatch(SET_LOGIN(true))
       await dispatch(SET_NAME(data.name))
+      await dispatch(SET_EMAIL(data.email))
       navigate('/account/profile')
    } catch (error) {
     console.log(error.message)
